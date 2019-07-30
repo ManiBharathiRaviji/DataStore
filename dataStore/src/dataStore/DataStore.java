@@ -34,11 +34,9 @@ public class DataStore
 						{
 							System.out.println("Enter the key to add to data store:");
 							key = in.next();
-							//System.out.println(key.length());
 							if(key.length()<=32)
 							{
 							check = checkKeyExist(key);
-							//check = 1;
 							if(check==1)
 							{
 								JSONObject value = new JSONObject();
@@ -54,10 +52,9 @@ public class DataStore
 								}
 								if(size<=16384) //checking whether JSON object size is less than or equal to 16KB - 16384
 								{
-									//System.out.println(size);
 									System.out.println("Do you want to set a Time-To-Live property?(y/n)");
 									char ch = in.next().charAt(0);
-									long ttl=-1;
+									long ttl=-1; //if ttl is -1 then no time-to-live is mentioned
 									Date date = new Date();
 									long time = date.getTime();
 									if((ch=='y')||(ch=='Y'))
@@ -135,6 +132,7 @@ public class DataStore
 		return flag;
 	}
 	
+	//check the size of the file
 	public static int checkFileSize()
 	{
 		int flag=1;
@@ -212,8 +210,6 @@ public class DataStore
 		try(BufferedReader reader = new BufferedReader(new FileReader(data));
 			BufferedWriter writer = new BufferedWriter(new FileWriter(temp));)
 		{
-			//check whether the key exist
-			
 			while((line=reader.readLine())!=null)
 			{
 				JSONObject jobj =  (JSONObject) new JSONParser().parse(line);
